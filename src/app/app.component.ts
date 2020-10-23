@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Livro } from './livro.model';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Gerenciador-Livros';
+
+  livros: Livro[] = []
+
+  onLivroAdicionado(livro) {
+    this.livros = [ ...this.livros, livro ]
+  }
 }
+

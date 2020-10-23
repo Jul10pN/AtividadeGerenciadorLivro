@@ -1,0 +1,22 @@
+<h2>Livros Cadastrados</h2>
+
+<mat-accordion>
+
+  <mat-expansion-panel *ngFor="let livro of livros">
+
+    <mat-expansion-panel-header>
+      Titulo: {{ livro.titulo }}
+    </mat-expansion-panel-header>
+
+    <p>Id: {{ livro.id }} </p>
+    <p>Autor: {{ livro.autor }} </p>
+    <p>N° Páginas: {{ livro.paginas }} </p>
+
+  </mat-expansion-panel>
+
+
+</mat-accordion>
+
+<p *ngIf="livros.length <= 0">
+  Nenhum livro cadastrado!
+</p>

@@ -1,0 +1,34 @@
+<h2>Cadrastro de Livros</h2>
+
+<mat-card>
+
+  <mat-form-field>
+    <input type="text" matInput
+      placeholder="ID do Livro"
+      [(ngModel)]="id" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" matInput
+      placeholder="Titulo"
+      [(ngModel)]="titulo" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" matInput
+      placeholder="Autor"
+      [(ngModel)]="autor" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" matInput
+      placeholder="Páginas"
+      [(ngModel)]="paginas" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary"
+    (click)="onAdicionarLivro()"
+    >Cadastrar Livro
+  </button>
+
+</mat-card>

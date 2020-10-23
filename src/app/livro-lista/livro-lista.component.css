@@ -1,0 +1,12 @@
+h2{
+  text-align: center;
+}
+
+p{
+  text-align: center;
+}
+
+:host {
+  margin-top: 2rem;
+  display: block;
+}
