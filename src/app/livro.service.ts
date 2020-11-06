@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Livro } from './livro.model';
 import { Subject } from 'rxjs';
 
@@ -6,15 +7,22 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class LivroService {
-  constructor() { }
+
+  constructor( private httpClient : HttpClient) {
+
+  }
 
   private livros: Livro [] = [];
 
   private listaLivrosAtualizada = new Subject<Livro[]>();
 
-  getLivros(): Livro[] {
-    return [...this.livros];
-
+  getLivros(): void {
+      this.httpClient.get<{mensagem: string, livros: Livro[]}>(
+        'http://localhost:3000/api/livros'
+      ).subscribe((dados) =>{
+        this.livros = dados.livros
+        this.listaLivrosAtualizada.next([...this.livros])
+      })
   }
 
   adicionarLivro(id: string, titulo: string, autor: string, paginas: string): void {
@@ -24,9 +32,14 @@ export class LivroService {
       autor: autor,
       paginas: paginas,
     };
-    this.livros.push(livro);
-
-    this.listaLivrosAtualizada.next([...this.livros]);
+    this.httpClient.post<{mensagem: string}>(
+      'http://localhost:3000/api/livros',
+      livro
+    ).subscribe((dados)=>{
+      console.log(dados.mensagem)
+      this.livros.push(livro);
+      this.listaLivrosAtualizada.next([...this.livros]);
+    })
   }
 
   getListaDeLivrosAtualizadaObservable() {
